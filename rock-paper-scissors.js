@@ -6,8 +6,6 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     let result;
-    console.log("playerSelection " + playerSelection)
-    console.log("computerSelection " + computerSelection)
 
     if (playerSelection === 'Rock' && computerSelection === 'Paper') {
         result = "You lose.";
@@ -40,8 +38,10 @@ function game() {
 
             // div to show round result
             const resultDiv = document.createElement('div');
+
             const resultDivTextNode = document.createTextNode(roundResult);
             resultDiv.appendChild(resultDivTextNode);
+
 
             // append the newly created div element to the body
             document.body.appendChild(resultDiv);
@@ -55,6 +55,7 @@ function game() {
 
             console.log(playerScores);
             console.log(computerScores);
+
 
             // compute and display game results
             if (Number(computerScores) === 5 || Number(playerScores) === 5) {
@@ -76,9 +77,27 @@ function game() {
                 // resetting scores after displaying game results
                 computerScores = 0;
                 playerScores = 0;
+                function empty(element) {
+                    element.textContent = '';
+                }
+
+                let parent = document.getElementById('container');
+                empty(parent);
+
             }
+
         });
     });
 }
 
 game();
+// function empty(element) {
+//     while (element.firstElementChild) {
+//         element.firstElementChild.remove();
+//     }
+// }
+
+// let parent = document.getElementById("parent");
+// empty(parent);
+
+
