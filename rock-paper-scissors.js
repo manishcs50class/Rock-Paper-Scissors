@@ -32,16 +32,23 @@ function game() {
 
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
+
+            // remove round score divs before next click
+            const roundScoreElement = document.getElementById("round-score");
+            if (roundScoreElement != null) {
+                roundScoreElement.remove();
+            }
+
             const compSelection = getComputerChoice();
             const playerSelection = button.innerHTML;
             const roundResult = playRound(playerSelection, compSelection);
 
             // div to show round result
             const resultDiv = document.createElement('div');
+            resultDiv.setAttribute("id", "round-score");
 
             const resultDivTextNode = document.createTextNode(roundResult);
             resultDiv.appendChild(resultDivTextNode);
-
 
             // append the newly created div element to the body
             document.body.appendChild(resultDiv);
@@ -52,9 +59,9 @@ function game() {
             } else if (roundResult === 'You lose.') {
                 computerScores += 1;
             }
-
-            console.log(playerScores);
-            console.log(computerScores);
+            //show running score
+            document.getElementById('player-scores-button').innerText = "PlayerScores = " + playerScores;
+            document.getElementById('computer-scores-button').innerText = "ComputerScores = " + computerScores;
 
 
             // compute and display game results
@@ -77,13 +84,6 @@ function game() {
                 // resetting scores after displaying game results
                 computerScores = 0;
                 playerScores = 0;
-                function empty(element) {
-                    element.textContent = '';
-                }
-
-                let parent = document.getElementById('container');
-                empty(parent);
-
             }
 
         });
@@ -91,13 +91,3 @@ function game() {
 }
 
 game();
-// function empty(element) {
-//     while (element.firstElementChild) {
-//         element.firstElementChild.remove();
-//     }
-// }
-
-// let parent = document.getElementById("parent");
-// empty(parent);
-
-
